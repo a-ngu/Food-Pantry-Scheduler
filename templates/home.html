@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title >UC Berkeley Basic Needs Food Pantry</title>
+  </head>
+  <body>
+    {% extends "template.html" %}
+    {% block content %}
+    
+    <h1> Automated Scheduler </h1>
+
+
+    
+
+     <form action = "/home" method = "POST" enctype = "multipart/form-data">
+     	<p>Click on the "Choose File" button to upload a CSV of the Volunteer Availabilities:</p>
+     	<input type = "file" name = "Volunteers" accept=".csv" />
+     	<p>Click on the "Choose File" button to upload a CSV of the Recovery Shifts:</p>
+     	<input type = "file" name = "Recovery" accept=".csv" />
+     	<p>Click on the "Choose File" button to upload a CSV of the Shifts:</p>
+     	<input type = "file" name = "Shifts" accept=".csv" />
+     	<p>Click Submit to generate automated schedule</p>
+     	<input type = "submit" value = "Submit" />
+     </form>
+
+
+
+	{% endblock %}
+  </body>
+</html>
