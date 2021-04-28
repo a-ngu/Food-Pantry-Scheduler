@@ -6,14 +6,55 @@
     
     <link rel="stylesheet" href="{{ url_for('static',    filename='css/template.css') }}">
     
-</head>
+
+  <style>
+  body {
+    background-color: url('pantry.jpeg');
+
+  }
+  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  background-color: #DDD5C7;
+  text-align: center;
+
+}
+
+li {
+  float: center;
+}
+
+li a {
+  display: block;
+  color: #666;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+li a.active {
+  color: white;
+  background-color: #4CAF50;
+}
+h1{text-align:center;
+color:#FDB515;}
+p{color:white;}
+  </style>
+  </head>
   <body>
     <header>
       <div class="container">
         <h1 class="logo">First Web App</h1>
         <strong><nav>
           <ul class="menu">
-            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('home') }}">Automated Scheduler</a></li>
             <li><a href="{{ url_for('about') }}">About</a></li>
           </ul>
         </nav></strong>

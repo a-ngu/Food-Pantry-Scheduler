@@ -4,15 +4,14 @@ import numpy as np
 from ortools.sat.python import cp_model
 
 # data imports
-def read_csvs(response_csv, shift_csv, recovery_csv):
+def read_csvs(response_csv, shift_csv):
     #responses = pd.read_csv("autoscheduler_Export.csv")
     #shifts = pd.read_csv("shifts.csv")
     #recovery_shifts = pd.read_csv('recoveryshifts.csv')
     responses = pd.read_csv(response_csv)
     shifts = pd.read_csv(shift_csv)
-    recovery_shifts = pd.read_csv(recovery_csv)
     hours = responses[['Full Name', 'Volunteer Weekly Commitment']].set_index('Full Name')
-    assignments = run_csp(responses, shifts, recovery_shifts, hours)
+    assignments = run_csp(responses, shifts, hours)
     return assignments
 
 #data transformation
@@ -31,7 +30,7 @@ def Transform_Responses(shifts, response_df):
         availability.loc[len(availability)] = row_data
     return availability
 
-def run_csp(responses, shifts, recovery_shifts, hours):
+def run_csp(responses, shifts, hours):
     availability = Transform_Responses(shifts, responses).set_index('Full Name')
 
     #define decision variables
