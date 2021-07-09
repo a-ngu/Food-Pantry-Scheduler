@@ -4,9 +4,12 @@ from csp import *
 
 app = Flask(__name__)
 
+
+application = app
+
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html",  len= len(shift_records), shift_records=shift_records)
     
 @app.route("/about")
 def about():
@@ -15,6 +18,9 @@ def about():
 @app.route('/home', methods = ['POST', 'GET'])
 def upload():
     if request.method == 'POST':
+        shift_times = []
+        for key, value in request.form.items():
+            shift_times.append(int(value))
         volunteers = request.files['Volunteers']
         volunteers.save(secure_filename(volunteers.filename))
 
@@ -25,7 +31,7 @@ def upload():
 
         shift_csv = shifts.filename
 
-        assignments = get_data(response_csv, shift_csv)
+        assignments = get_data(response_csv, shift_csv, shift_times)
 
         resp = make_response(assignments.to_csv())
         resp.headers["Content-Disposition"] = "attachment; filename=automated_schedule.csv"
@@ -34,8 +40,8 @@ def upload():
         return resp
 
 @app.route('/home')
-def get_data(response_csv, shift_csv):
-    return read_csvs(response_csv, shift_csv)
+def get_data(response_csv, shift_csv, lower_bounds):
+    return read_csvs(response_csv, shift_csv, lower_bounds)
 
 @app.route('/home')
 def run_algorithm():

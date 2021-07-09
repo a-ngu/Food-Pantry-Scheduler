@@ -1,25 +1,32 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
- <head>
-   <meta charset="utf-8">
-   <title>Flask Parent Template</title>
-   <link rel="stylesheet" href="{{ url_for('static',     filename='css/template.css') }}">
- </head>
- <body>
-    <header>
-      <div class="container">
-        <h1 class="logo">UC Berkeley Basic Needs Food Pantry</h1>
-        <strong><nav>
+
+<head>
+  <meta charset="utf-8">
+  <title>Flask Parent Template</title>
+  <link rel="stylesheet" href="{{ url_for('static',     filename='css/template.css') }}">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <h1 class="logo">UC Berkeley Basic Needs Food Pantry</h1>
+      <strong>
+        <nav>
           <ul class="menu">
             <li><a href="{{ url_for('home') }}">Automated Scheduler</a></li>
             <li><a href="{{ url_for('about') }}">About</a></li>
           </ul>
-        </nav></strong>
-      </div>
-    </header>
-    
-    {% block content %}
-    {% endblock %}
-    
- </body>
+        </nav>
+      </strong>
+    </div>
+  </header>
+
+  {% block content %}
+  {% endblock %}
+
+</body>
+
 </html>

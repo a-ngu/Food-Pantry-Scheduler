@@ -4,18 +4,19 @@
     <meta charset="utf-8">
     <title>About Flask</title>
   </head>
-  <body style="background-color: #003262;">
+  <body>
     {% extends "template.html" %}
     {% block content %}
     
     <h1> About </h1>
+    <div class="about-block">
     <p> This web application has been created in order to automate scheduling of pantry volunteers.</p>
     <p> Instructions: </p>
     <p> First, download the CSVs for the volunteer availabilities and the pantry schedule from the Airtable database.</p>
     <p> Next, upload both files to the web application.</p>
     <p> Then, click submit to have the automated schedule donwload directly to your browser.</p>
     <p> Finally, upload the CSV back to the Airtable database for easy readabilitiy.</p>
-      
+  </div>
     {% endblock %}
   </body>
 </html>

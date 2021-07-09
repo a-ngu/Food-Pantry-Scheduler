@@ -2,16 +2,49 @@
 import pandas as pd
 import numpy as np
 from ortools.sat.python import cp_model
+import requests
+
+api_key = "keyB5I5hLN8iKV5y3"
+base_id = 'app4kNRRTwN0JBBNk'
+headers = {"Authorization": "Bearer " + api_key}
+table_name="Schedule"
+url = "https://api.airtable.com/v0/" + base_id + "/" + table_name
+params={"view": 'Schedule CSV Export'}
+
+response = requests.get(url, params=params, headers=headers)
+airtable_response = response.json()
+
+airtable_records = airtable_response['records']
+params = ()
+airtable_records = []
+run = True
+while run is True:
+  response = requests.get(url, params=params, headers=headers)
+  airtable_response = response.json()
+  airtable_records += (airtable_response['records'])
+  if 'offset' in airtable_response:
+     run = True
+     params = (('offset', airtable_response['offset']),)
+  else:
+     run = False
+
+airtable_rows = [] 
+airtable_index = []
+for record in airtable_records:
+    airtable_rows.append(record['fields'])
+    airtable_index.append(record['id'])
+shift_records = pd.DataFrame(airtable_rows, index=airtable_index)['Volunteer Shift'].tolist()
+
 
 # data imports
-def read_csvs(response_csv, shift_csv):
+def read_csvs(response_csv, shift_csv, lower_bounds):
     #responses = pd.read_csv("autoscheduler_Export.csv")
     #shifts = pd.read_csv("shifts.csv")
     #recovery_shifts = pd.read_csv('recoveryshifts.csv')
     responses = pd.read_csv(response_csv)
     shifts = pd.read_csv(shift_csv)
     hours = responses[['Full Name', 'Volunteer Weekly Commitment']].set_index('Full Name')
-    assignments = run_csp(responses, shifts, hours)
+    assignments = run_csp(responses, shifts, hours, lower_bounds)
     return assignments
 
 #data transformation
@@ -22,6 +55,7 @@ def Transform_Responses(shifts, response_df):
     for i in np.arange(response_df.shape[0]):
         mapping = []
         for j in all_shifts:
+            print(response_df.iloc[i,2])
             if j in response_df.iloc[i,2]:
                 mapping.append(1)
             else:
@@ -30,7 +64,7 @@ def Transform_Responses(shifts, response_df):
         availability.loc[len(availability)] = row_data
     return availability
 
-def run_csp(responses, shifts, hours):
+def run_csp(responses, shifts, hours, lower_bounds):
     availability = Transform_Responses(shifts, responses).set_index('Full Name')
 
     #define decision variables
@@ -99,9 +133,14 @@ def run_csp(responses, shifts, hours):
 
     #shift based constraints (filling each shift but not overfilling)
     #lower bound (of 1) on shifts
-    for shift in shift_Sum:
-        model.Add(sum(shift) >= 1)
-        model.Add(sum(shift) <= 5)
+    print(len(shift_Sum))
+    for shift in range(len(shift_Sum)-1):
+        if type(lower_bounds) == int:
+            model.Add(sum(shift_Sum[shift]) >= lower_bounds)
+            model.Add(sum(shift_Sum[shift]) <= 5)
+        else:
+            model.Add(sum(shift_Sum[shift]) >= lower_bounds[shift])
+            model.Add(sum(shift_Sum[shift]) <= 5)
         
         
     print('shift constraints created!')

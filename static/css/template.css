@@ -1,37 +1,33 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Flask Parent Template</title>
-    
-    <link rel="stylesheet" href="{{ url_for('static',    filename='css/template.css') }}">
-    
-
-  <style>
-  body {
-    background-color: url('pantry.jpeg');
-
-  }
-  ul {
+body {
+  background-color: #fbfbfb;
+  font-family: "Open Sans";
+}
+ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  border: 1px solid #e7e7e7;
-  background-color: #DDD5C7;
   text-align: center;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 li {
   float: center;
+  background-color: #fcfcfc;
+  margin: 0px 40px 0px 40px;
+  width: 30%;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #f0f0f3;
 }
 
 li a {
+  padding: 25px;
   display: block;
-  color: #666;
+  color: black;
   text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
 }
 
@@ -41,28 +37,85 @@ li a:hover:not(.active) {
 
 li a.active {
   color: white;
-  background-color: #4CAF50;
+  background-color: #4caf50;
 }
-h1{text-align:center;
-color:#FDB515;}
-p{color:white;}
-  </style>
-  </head>
-  <body>
-    <header>
-      <div class="container">
-        <h1 class="logo">First Web App</h1>
-        <strong><nav>
-          <ul class="menu">
-            <li><a href="{{ url_for('home') }}">Automated Scheduler</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
-          </ul>
-        </nav></strong>
-      </div>
-    </header>
-    
-{% block content %}
-{% endblock %}
-
- </body>
-</html>
+h1 {
+  text-align: center;
+  font-weight: bold;
+}
+h4 {
+  text-align: center;
+  font-weight: bold;
+  color:gray
+}
+p {
+  color: black;
+}
+.uploads {
+  text-align: center;
+}
+table {
+  padding: 20px;
+  background-color: white;
+  border-collapse: collapse;
+  border-width: 3px;
+  border-radius: 10px;
+  border-style: solid;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+  border-color: #f0f0f3;
+}
+th {
+  font-weight: bold;
+  padding: 20px;
+}
+tr {
+  padding: 10px;
+  font-weight: bold;
+}
+td {
+  padding: 30px;
+}
+input {
+  padding: 10px;
+  width: 30%;
+  border: none;
+  background-color: #f0f0f3;
+  text-align: center;
+}
+#reset-button {
+  color: #1067e3;
+  background-color: #f0f0f3;
+  padding: 15px 35px 15px 35px;
+  border-width: 2px;
+  border-color: #1067e3;
+  border-radius: 5px;
+  border-style: solid;
+  font-size: 18px;
+}
+#submit-button {
+  padding: 15px 35px 15px 35px;
+  background-color: #1067e3;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  border-radius: 5px;
+  color:white;
+  text-align: center;
+  font-size: 18px;
+}
+.table-head {
+  border-width: 3px;
+  border-color: #f0f0f3;
+  border-style: solid;
+}
+.about-block {
+  padding: 30px;
+  background-color: #fcfcfc;
+  border-width: 3px;
+  border-color: #f0f0f3;
+  border-style: solid;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
