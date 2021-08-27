@@ -2,51 +2,49 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta charset="utf-8">
-  <title>UC Berkeley Basic Needs Food Pantry</title>
+    <meta charset="utf-8">
+    <title>UC Berkeley Basic Needs Food Pantry</title>
 </head>
 
 <body>
-  {% extends "template.html" %}
-  {% block content %}
+    {% extends "template.html" %} {% block content %}
 
-  <h1> Automated Scheduler (CSV Export) </h1>
-  <h4> Shift Times are currently being pulled from: Summer 2021 Food Pantry Database </h2>
-    <div class="uploads">
-      <form action="/home" method="POST" enctype="multipart/form-data">
-        <p>1. Upload "Availabilities CSV Export" file from Airtable Volunteers views:</p>
-        <input type="file" name="Volunteers" accept=".csv" />
-        <br>
-        <br>
-        <p>2. Upload "Schedule CSV Export" file from Airtable Schedule views:</p>
-        <input type="file" name="Shifts" accept=".csv" />
-        <br>
-        <br>
-        <p>3. Assign prefered amount of volunteers per shift:</p>
-    </div>
-    <table>
-      <tr class="table-head">
-        <th>Shift Time</th>
-        <th># of Volunteers</th>
-        <!--<th> <button id="reset-button">Reset to Default</button> </th>-->
-      </tr>
-      {% for i in range(0, len) %}
-      <tr>
-        <td>{{shift_records[i]}}</td>
-        <td><input type="number" value="1" name={{i}} /></td>
-      </tr>
-      {{ table|safe }}
-      {% endfor %}
+    <h1> Automated Scheduler (CSV Export) </h1>
+    <h4> Shift Times are currently being pulled from: Fall 2021 Food Pantry Database </h2>
+        <div class="uploads">
+            <form action="/home" method="POST" enctype="multipart/form-data">
+                <p>1. Upload "Availabilities CSV Export" file from Airtable Volunteers views:</p>
+                <input type="file" name="Volunteers" accept=".csv" />
+                <br>
+                <br>
+                <p>2. Upload "Schedule CSV Export" file from Airtable Schedule views:</p>
+                <input type="file" name="Shifts" accept=".csv" />
+                <br>
+                <br>
+                <p>3. Assign prefered amount of volunteers per shift:</p>
+        </div>
+        <table>
+            <tr class="table-head">
+                <th>Shift Time</th>
+                <th># of Volunteers</th>
+                <!--<th> <button id="reset-button">Reset to Default</button> </th>-->
+            </tr>
+            {% for i in range(0, len) %}
+            <tr>
+                <td>{{shift_records[i]}}</td>
+                <td><input type="number" value="1" name={{i}} /></td>
+            </tr>
+            {{ table|safe }} {% endfor %}
 
-    </table>
-    <center>
-      <input type="submit" value="Submit" id="submit-button" />
-    </center>
-    </form>
+        </table>
+        <center>
+            <input type="submit" value="Submit" id="submit-button" />
+        </center>
+        </form>
 
 
 
-    {% endblock %}
+        {% endblock %}
 </body>
 
 </html>

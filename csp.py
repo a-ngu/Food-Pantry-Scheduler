@@ -5,7 +5,7 @@ from ortools.sat.python import cp_model
 import requests
 
 api_key = "keyB5I5hLN8iKV5y3"
-base_id = 'app4kNRRTwN0JBBNk'
+base_id = 'app3ocFMTw5DNqiLT'
 headers = {"Authorization": "Bearer " + api_key}
 table_name="Schedule"
 url = "https://api.airtable.com/v0/" + base_id + "/" + table_name
